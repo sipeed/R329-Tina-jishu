@@ -9,7 +9,7 @@
 	url = https://e.coding.net/sipeed_ai/r329/config.git
 [submodule "prebuilt"]
 	path = prebuilt
-	url = https://e.coding.net/sipeed_ai/r329/prebuilt
+	url = https://e.coding.net/sipeed_ai/r329/prebuilt.git
 [submodule "scripts"]
 	path = scripts
 	url = https://e.coding.net/sipeed_ai/r329/scripts.git
