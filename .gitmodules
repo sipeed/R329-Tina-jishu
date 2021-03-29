@@ -1,0 +1,33 @@
+[submodule "lichee/linux-4.9"]
+	path = lichee/linux-4.9
+	url = https://e.coding.net/sipeed_ai/r329/linux-4.9.git
+[submodule "build"]
+	path = build
+	url = https://e.coding.net/sipeed_ai/r329/build.git
+[submodule "config"]
+	path = config
+	url = https://e.coding.net/sipeed_ai/r329/config.git
+[submodule "prebuilt"]
+	path = prebuilt
+	url = https://e.coding.net/sipeed_ai/r329/prebuilt
+[submodule "scripts"]
+	path = scripts
+	url = https://e.coding.net/sipeed_ai/r329/scripts.git
+[submodule "target"]
+	path = target
+	url = https://e.coding.net/sipeed_ai/r329/target.git
+[submodule "toolchain"]
+	path = toolchain
+	url = https://e.coding.net/sipeed_ai/r329/toolchain.git
+[submodule "package"]
+	path = package
+	url = https://e.coding.net/sipeed_ai/r329/package.git
+[submodule "tools"]
+	path = tools
+	url = https://e.coding.net/sipeed_ai/r329/tools.git
+[submodule "dl"]
+	path = dl
+	url = https://e.coding.net/sipeed_ai/r329/dl.git
+[submodule "lichee/brandy-2.0"]
+	path = lichee/brandy-2.0
+	url = https://e.coding.net/sipeed_ai/r329/brandy-2.0.git
