@@ -11,7 +11,6 @@
 	compatible = "allwinner,r329", "arm,sun50iw11p1";
 
 	aliases {
-		pmu0 = &pmu0;
 		standby_param = &standby_param;
 	};
 
@@ -111,12 +110,13 @@
 			apbs0-to-32k = <0x0>;
 			apbs1-to-32k = <0x0>;
 
-			nmi-wakeup = <0x1>;
-			pmu-exist = <0x1>;
+			pmu-exist = <0x0>;
+			nmi-wakeup = <0x0>;
 			uart-off  = <0x0>;
 
 			sleep-freq = <24000>;
 		};
+
 
 
 		sdc0: sdmmc@04020000 {
@@ -135,7 +135,8 @@
 			no-mmc;
 			max-frequency = <50000000>;
 			status = "okay";
-};
+		};
+
                 sdc1: sdmmc@04021000 {
 			sdc1_used       = <1>;
                         bus-width       = <4>;
@@ -436,7 +437,7 @@
 			audio_format = <0x04>;
 			daudio_master = <0x04>;
 			signal_inversion = <0x03>;
-			daudio_used = <0x1>; /* be equal to status = "okay" for dsp */
+			daudio_used = <0x0>; /* be equal to status = "okay" for dsp */
 			status = "disabled"; /* should not be setup to "okay" */
 		};
 
@@ -456,13 +457,14 @@
 		codec:codec@0x07032000 {
 			pa_level = <0x1>;
 			digital_vol = <0x00>;
-			gpio-pa-power = <&r_pio PM 8 1 1 1 1>;
-			gpio-spk = <&r_pio PN 22 1 1 1 1>;
+			gpio-pa-power = <&r_pio PN 22 1 1 1 1>;
+			gpio-boost-en = <&r_pio PN 20 1 1 1 1>;
+			gpio-spk = <&r_pio PM 8 1 1 1 1>;
 			/* dsp config */
 			playback_cma = <32>;
 			capture_cma = <64>;
 			pa_msleep_time = <0x64>;
-			spk_vol = <0xA>;
+			spk_vol = <0x14>;
 			mic1gain = <0x13>;
 			mic2gain = <0x13>;
 			mic3gain = <0x13>;
@@ -505,7 +507,7 @@
 			audio_format = <0x04>;
 			daudio_master = <0x01>;
 			signal_inversion = <0x03>;
-			status = "okay";
+			status = "disabled";
 		};
 
 		snddaudio3:sound@4 {
@@ -608,7 +610,7 @@
 			pinctrl-0 = <&spi1_pins_a>;
 			pinctrl-1 = <&spi1_pins_c>;
 			spi_slave_mode = <0>;
-			spi_dbi_enable = <1>;
+			spi_dbi_enable = <0>;
 			status = "okay";
 			spi_board1 {
 				device_type = "spi_board1";
@@ -712,7 +714,89 @@
 		is 0 to 8)
 		- lcd_spi_dc_pin: (pin definition of DC pin when lcd_if euqal 0)
 		*/
+
+		// lcd_fb0: lcd_fb0@0 {
+		// 	lcd_used = <1>;
+		// 	lcd_driver_name = "nv3029s";
+		// 	lcd_if = <1>;
+		// 	lcd_dbi_if = <4>;
+		// 	lcd_data_speed = <60>;
+		// 	lcd_spi_bus_num = <1>;
+		// 	lcd_x = <240>;
+		// 	lcd_y = <320>;
+
+		// 	lcd_pixel_fmt = <0>;
+		// 	lcd_dbi_fmt = <3>;
+		// 	lcd_rgb_order = <0>;
+
+		// 	lcd_width = <60>;
+		// 	lcd_height = <95>;
+		// 	lcd_pwm_used = <1>;
+		// 	lcd_pwm_ch = <4>;
+		// 	lcd_pwm_freq = <5000>;
+		// 	lcd_pwm_pol = <0>;
+		// 	lcd_frm = <1>;
+		// 	lcd_gamma_en = <1>;
+		// 	fb_buffer_num = <2>;
+		// 	lcd_backlight = <100>;
+		// 	lcd_gpio_0 = <&r_pio PN 21 1 1 1 1>;
+		// 	lcd_fps = <60>;
+		// };
+
 		lcd_fb0: lcd_fb0@0 {
+			lcd_used = <1>;
+			lcd_driver_name = "nv3029s";
+			lcd_pwm_freq = <5000>;
+			lcd_pwm_ch = <4>;
+			lcd_pwm_used = <1>;
+			lcd_y = <400>;
+			lcd_x = <240>;
+			lcd_spi_bus_num = <1>;
+			lcd_data_speed = <60>;
+			lcd_if = <0>;
+			lcd_pwm_pol = <0>;
+			lcd_pixel_fmt = <10>;
+			lcd_rgb_order = <0>;
+			fb_buffer_num = <1>;
+			lcd_backlight = <200>;
+			lcd_fps = <60>;
+			lcd_spi_dc_pin = <&pio PH 4 1 1 2 1>;
+			// lcd_gpio_0 = <&pio PH 4 1 1 2 1>;
+			// lcd_bl_en = <&pio PH 2 1 1 2 1>;
+			lcd_dbi_te = <0>;
+
+		};
+
+		/*lcd_fb0: lcd_fb0@0 {
+			lcd_used = <1>;
+			lcd_driver_name = "kld35512";
+			lcd_if = <1>;
+			lcd_dbi_if = <4>;
+			lcd_data_speed = <60>;
+			lcd_spi_bus_num = <1>;
+			lcd_x = <320>;
+			lcd_y = <480>;
+
+			lcd_pixel_fmt = <10>;
+			lcd_dbi_fmt = <2>;
+			lcd_rgb_order = <0>;
+			lcd_width = <60>;
+			lcd_height = <95>;
+			lcd_pwm_used = <1>;
+			lcd_pwm_ch = <4>;
+			lcd_pwm_freq = <5000>;
+			lcd_pwm_pol = <0>;
+			lcd_frm = <1>;
+			lcd_gamma_en = <1>;
+			fb_buffer_num = <2>;
+			lcd_backlight = <100>;
+			lcd_fps = <40>;
+			lcd_dbi_te = <1>;
+			lcd_dbi_clk_mode = <1>;
+			lcd_gpio_0 = <&r_pio PN 21 1 1 1 1>;
+		};*/
+
+		/*lcd_fb0: lcd_fb0@0 {
 			lcd_used = <1>;
 			lcd_driver_name = "kld2844b";
 			lcd_if = <1>;
@@ -736,10 +820,11 @@
 			lcd_backlight = <100>;
 			lcd_dbi_te = <1>;
 			lcd_fps = <60>;
-		};
+			lcd_gpio_0 = <&r_pio PN 21 1 1 1 1>;
+		};*/
 
 		/* kld2844b-tlsc6x */
-		twi1: twi@0x02502400{
+		/*twi1: twi@0x02502400{
 			status = "okay";
 			tlsc6x: tlsc6x@2e {
 				compatible = "tlsc6x,tlsc6x_ts";
@@ -753,10 +838,10 @@
 				exchange_x_y_flag = <1>;
 				status = "okay";
 			};
-		};
+		};*/
 
 		/* kld35512-_FT6336G and nv3029s-_FT6236U */
-		/*twi1: twi@0x02502400{
+		twi1: twi@0x02502400{
 			status = "okay";
 			touchscreen: fts@38 {
 				compatible = "focaltech,fts";
@@ -764,14 +849,15 @@
 				focaltech,reset-gpio = <&pio PH 7 1 1 1 1>;
 				focaltech,irq-gpio = <&r_pio PM 5 6 1 1 1>;
 				focaltech,max-touch-number = <1>;
-				focaltech,display-coords = <0 0 320 480>;
+				focaltech,display-coords = <0 0 240 320>;
 
+				/*focaltech,have-key;*/
 				focaltech,key-number = <0>;
 				focaltech,keys = <139 102 158>;
 				focaltech,key-y-coord = <2000>;
 				focaltech,key-x-coords = <200 600 800>;
 			};
-		};*/
+		};
 
 		keyboard0:keyboard{
 			compatible = "allwinner,keyboard_1350mv";
@@ -785,7 +871,6 @@
 			key2 = <590 248>;
 			key3 = <750 164>;
 			key4 = <880 102>;
-
 			wakeup-source;
 		};
 
@@ -800,154 +885,6 @@
 &twi2{
 	no_suspend = <1>;
 	status = "okay";
-
-	pmu0: pmu@34 {
-		compatible = "x-powers,axp2585";
-		reg = <0x34>;
-		interrupts = <0 IRQ_TYPE_LEVEL_LOW>;
-		interrupt-parent = <&nmi>;
-		interrupt-controller;
-		#interrupt-cells = <1>;
-
-		x-powers,drive-vbus-en;
-		pmu_reset = <0>;
-		pmu_irq_wakeup = <1>;
-		pmu_hot_shutdown = <1>;
-		status = "okay";
-
-		wakeup-source;
-
-		usb_power_supply: usb_power_supply {
-			compatible = "x-powers,axp2585-usb-power-supply";
-			status = "okay";
-
-			pmu_usbpc_vol = <4600>;
-			pmu_usbpc_cur = <500>;
-			pmu_usbad_vol = <4600>;
-			pmu_usbad_cur = <1500>;
-
-			wakeup_usb_in;
-			wakeup_usb_out;
-		};
-
-		battery_power_supply: battery_power_supply {
-			compatible = "x-powers,axp2585-battery-power-supply";
-			status = "okay";
-
-			pmu_chg_ic_temp = <0>;
-			pmu_battery_rdc= <100>;
-			pmu_battery_cap = <3568>;
-			pmu_runtime_chgcur = <900>;
-			pmu_suspend_chgcur = <1500>;
-			pmu_shutdown_chgcur = <1500>;
-			pmu_init_chgvol = <4200>;
-
-			pmu_safe_vol = <3400>;
-			pmu_on_ctrl = <9>;
-			pmu_boost_en = <1>;
-			pmu_boost_cur_limit = <1500>;
-			pmu_boost_vol_limit = <5126>;
-			pmu_boost_vol_hold = <2600>;
-			pmu_init_chg_pretime = <50>;
-			pmu_init_chg_csttime = <1200>;
-			pmu_ac_vol = <4600>;
-			pmu_ac_cur = <3000>;
-
-			pmu_battery_warning_level1 = <15>;
-			pmu_battery_warning_level2 = <0>;
-			pmu_chgled_type = <0>;
-			pmu_bat_para1 = <0>;
-			pmu_bat_para2 = <0>;
-			pmu_bat_para3 = <0>;
-			pmu_bat_para4 = <0>;
-			pmu_bat_para5 = <0>;
-			pmu_bat_para6 = <0>;
-			pmu_bat_para7 = <1>;
-			pmu_bat_para8 = <1>;
-			pmu_bat_para9 = <2>;
-			pmu_bat_para10 = <4>;
-			pmu_bat_para11 = <5>;
-			pmu_bat_para12 = <12>;
-			pmu_bat_para13 = <19>;
-			pmu_bat_para14 = <32>;
-			pmu_bat_para15 = <41>;
-			pmu_bat_para16 = <45>;
-			pmu_bat_para17 = <48>;
-			pmu_bat_para18 = <51>;
-			pmu_bat_para19 = <54>;
-			pmu_bat_para20 = <59>;
-			pmu_bat_para21 = <63>;
-			pmu_bat_para22 = <68>;
-			pmu_bat_para23 = <71>;
-			pmu_bat_para24 = <74>;
-			pmu_bat_para25 = <78>;
-			pmu_bat_para26 = <81>;
-			pmu_bat_para27 = <82>;
-			pmu_bat_para28 = <84>;
-			pmu_bat_para29 = <88>;
-			pmu_bat_para30 = <92>;
-			pmu_bat_para31 = <96>;
-			pmu_bat_para32 = <100>;
-
-			wakeup_bat_out;
-			/* wakeup_bat_in; */
-			/* wakeup_bat_charging; */
-			/* wakeup_bat_charge_over; */
-			/* wakeup_low_warning1; */
-			/* wakeup_low_warning2; */
-			/* wakeup_bat_untemp_work; */
-			/* wakeup_bat_ovtemp_work; */
-			/* wakeup_bat_untemp_chg; */
-			/* wakeup_bat_ovtemp_chg; */
-
-			pmu_bat_temp_enable = <0>;
-			pmu_bat_charge_ltf = <2261>;
-			pmu_bat_charge_htf = <388>;
-			pmu_bat_shutdown_ltf = <3200>;
-			pmu_bat_shutdown_htf = <237>;
-			pmu_bat_temp_para1 = <7466>;
-			pmu_bat_temp_para2 = <4480>;
-			pmu_bat_temp_para3 = <3518>;
-			pmu_bat_temp_para4 = <2786>;
-			pmu_bat_temp_para5 = <2223>;
-			pmu_bat_temp_para6 = <1788>;
-			pmu_bat_temp_para7 = <1448>;
-			pmu_bat_temp_para8 = <969>;
-			pmu_bat_temp_para9 = <664>;
-			pmu_bat_temp_para10 = <466>;
-			pmu_bat_temp_para11 = <393>;
-			pmu_bat_temp_para12 = <333>;
-			pmu_bat_temp_para13 = <283>;
-			pmu_bat_temp_para14 = <242>;
-			pmu_bat_temp_para15 = <179>;
-			pmu_bat_temp_para16 = <134>;
-		};
-
-		regulator0: regulators@0 {
-			reg_drivevbus: drivevbus {
-			regulator-name = "axp2585-drivevbus";
-			};
-
-		};
-
-		virtual-drivevbus {
-			compatible = "xpower-vregulator,drivevbus";
-			drivevbus-supply = <&reg_drivevbus>;
-
-		};
-
-		powerkey0: powerkey@0 {
-			status = "okay";
-			compatible = "x-powers,axp2585-pek";
-			pmu_powkey_off_time = <6000>;
-			pmu_powkey_off_func = <0>;
-			pmu_powkey_off_en = <1>;
-			pmu_powkey_long_time = <1500>;
-			pmu_powkey_on_time = <1000>;
-			wakeup_rising;
-			/* wakeup_falling; */
-		};
-	};
 /*
 	ac107@36 {
 		compatible = "Allwinnertech,ac107_0";

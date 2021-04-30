@@ -61,12 +61,6 @@ size = 252
     user_type    = 0x8000
 
 [partition]
-    name         = rootfs
-    size         = 61740
-    downloadfile = "rootfs.fex"
-    user_type    = 0x8000
-
-[partition]
     name         = dsp0
     size         = 2520
     downloadfile = "dsp0.fex"
@@ -78,25 +72,31 @@ size = 252
     downloadfile = "dsp1.fex"
     user_type    = 0x8000
 
-;for recovery
 [partition]
-    name         = dsp0-r
-    size         = 2520
-    downloadfile = "dsp0.fex"
+    name         = rootfs
+    size         = 393216
+    downloadfile = "rootfs.fex"
     user_type    = 0x8000
 
 ;for recovery
-[partition]
-    name         = dsp1-r
-    size         = 2520
-    downloadfile = "dsp1.fex"
-    user_type    = 0x8000
+;[partition]
+;    name         = dsp0-r
+;    size         = 2520
+;    downloadfile = "dsp0.fex"
+;    user_type    = 0x8000
 
-[partition]
-    name         = recovery
-    size         = 28224
-    ;downloadfile = "recovery.fex"
-    user_type    = 0x8000
+;for recovery
+;[partition]
+;    name         = dsp1-r
+;    size         = 2520
+;    downloadfile = "dsp1.fex"
+;    user_type    = 0x8000
+
+;[partition]
+;    name         = recovery
+;    size         = 28224
+;    ;downloadfile = "recovery.fex"
+;    user_type    = 0x8000
 
 [partition]
     name         = UDISK
