@@ -866,11 +866,18 @@
 			interrupts = <GIC_SPI 115 IRQ_TYPE_NONE>;
 			status = "okay";
 			key_cnt = <5>;
-			key0 = <210 115>;
-			key1 = <410 114>;
-			key2 = <590 248>;
-			key3 = <750 164>;
+
+			key0 = <160 115>;
+			key1 = <317 114>;
+			key2 = <474 248>;
+			key3 = <614 164>;
 			key4 = <880 102>;
+
+			// key0 = <210 115>;
+			// key1 = <410 114>;
+			// key2 = <590 248>;
+			// key3 = <750 164>;
+			// key4 = <880 102>;
 			wakeup-source;
 		};
 
