@@ -1,6 +1,6 @@
 [submodule "lichee/linux-4.9"]
 	path = lichee/linux-4.9
-	url = https://e.coding.net/sipeed_ai/r329/linux-4.9.git
+	url = https://github.com/sipeed/r329-linux-4.9.git
 [submodule "build"]
 	path = build
 	url = https://e.coding.net/sipeed_ai/r329/build.git
@@ -15,13 +15,13 @@
 	url = https://e.coding.net/sipeed_ai/r329/scripts.git
 [submodule "target"]
 	path = target
-	url = https://e.coding.net/sipeed_ai/r329/target.git
+	url = https://github.com/sipeed/r329-target.git
 [submodule "toolchain"]
 	path = toolchain
 	url = https://e.coding.net/sipeed_ai/r329/toolchain.git
 [submodule "package"]
 	path = package
-	url = https://e.coding.net/sipeed_ai/r329/package.git
+	url = https://github.com/sipeed/r329-package.git
 [submodule "tools"]
 	path = tools
 	url = https://e.coding.net/sipeed_ai/r329/tools.git
